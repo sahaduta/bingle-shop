@@ -15,20 +15,12 @@ class ItemsController {
             offset: offset,
             // raw : true
         });
-
-        // console.log(data);
-
-        // data.map(value => {
-        //     console.log(value.toJSON())
-        // })
         
         return new Response(res, 200, data);
     };
     
     async insertItem(req, res, next){
         try {
-            // throw new ErrorResponse(400, {message: 'Gagal insert item'});
-
             const data = {
                 name: req.body.name,
                 price: req.body.price,
