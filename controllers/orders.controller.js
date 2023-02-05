@@ -12,9 +12,12 @@ class OrdersController {
 
             for(let item of req.body) {
                 let price = await Product.findOne({
-                    attributes: ['id', 'price','name'],
+                    attributes: ['id', 'price'],
                     where: { id: item.product_id }
                 })
+                if (!price) {
+                    throw new ErrorResponse(401, `Product ID ${item.product_id} tidak ditemukan!`);
+                }
                 productPriceMapping[price.id] = price.price * item.qty;
                 total += price.price * item.qty;
             }
@@ -46,10 +49,6 @@ class OrdersController {
 
             // masukkan banyak baris ke tabel order_items
             await OrderItem.bulkCreate(dataOrderItems);
-
-            if (!result) {
-                throw new ErrorResponse(401, "Product ID tidak ditemukan!");
-            }
 
             // data untuk response
             const response = {
