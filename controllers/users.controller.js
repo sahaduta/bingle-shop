@@ -10,7 +10,7 @@ class UsersController {
     async register(req, res, next) {
         try {
             // validasi penulisan input
-            const {email, password, name} = req.body
+            const {email, password, name, address, phone} = req.body
             await validate(registerSchema, req.body);
 
             // cek apakah email sudah terdaftar
@@ -32,7 +32,9 @@ class UsersController {
             const user = await User.create({
                 email,
                 password: hashPassword,
-                fullname: name
+                fullname: name,
+                address,
+                phone
             });
 
             return new Response(res, 201, {
