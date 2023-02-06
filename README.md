@@ -1,6 +1,9 @@
 # bingle-shop
 
+Link ERD: https://drive.google.com/file/d/1TzYwkjzs0JGpZWBVFGlvXo5p-9f1sM8J/view?usp=sharing
+
 API di bawah ini membutuhkan bearer token yang didapatkan saat login.
+
 - Get Items
 - Insert Item
 - Create Order
