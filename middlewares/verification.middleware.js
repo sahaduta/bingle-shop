@@ -9,7 +9,6 @@ const verifyToken = (req, res, next) => {
             const bearerToken = bearer[1];
             
             result = jwt.verify(bearerToken, process.env.JWT_KEY);
-            console.log(result);
 
             req.decodedJWT = result;
             
