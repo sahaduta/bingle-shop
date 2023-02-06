@@ -5,5 +5,6 @@ const itemsController = new ItemsController();
 
 router.get('/items', itemsController.getItems); 
 router.post('/items', itemsController.insertItem);
+router.delete('/items', itemsController.deleteItem);
 
 module.exports = router;

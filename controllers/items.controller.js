@@ -36,6 +36,19 @@ class ItemsController {
         }
     };
 
+    async deleteItem(req, res, next){
+        try {
+            const result = await Product.destroy({ where: { id: req.body.id } });
+            if (result == 0) {
+                throw new ErrorResponse(401, `id ${req.body.id} tidak ditemukan`);
+            }
+        
+            return new Response(res, 201, `id ${req.body.id} berhasil dihapus`);
+        } catch (error) {
+            next(error);
+        }
+    };
+
 }
 
 
