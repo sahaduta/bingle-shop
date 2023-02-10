@@ -5,6 +5,6 @@ const ordersController = new OrdersController();
 
 router.post('/orders', ordersController.createOrder);
 
-router.patch('/update-status-order', ordersController.updateStatusOrder);
+router.patch('/orders', ordersController.updateStatusOrder);
 
 module.exports = router;
