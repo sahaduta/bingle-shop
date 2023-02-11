@@ -36,6 +36,51 @@ class ItemsController {
         }
     };
 
+    async updateItem(req, res, next){
+        try {
+            const cekItemId = await Product.findOne(
+                {
+                    where: {id: req.body.id}
+                }
+            )
+
+            if (!cekItemId) {
+                throw new ErrorResponse(400, `Item ID ${req.body.id} tidak ditemukan!`);
+            }
+
+            const result = await Product.update(
+                {
+                    name: req.body.name,
+                    price: req.body.price,
+                    stock: req.body.stock,
+                    sku: req.body.sku,
+                    user_id: req.decodedJWT.user_id
+
+                },
+                {
+                    where: { id: req.body.id}
+                }
+            );
+
+            if (result == 0) {
+                throw new ErrorResponse(400, 'Item ID tidak ditemukan!');
+            }
+
+            const response = {
+                id: req.body.id,
+                name: req.body.name,
+                price: req.body.price,
+                stock: req.body.stock,
+                sku: req.body.sku,
+                user_id: req.decodedJWT.user_id
+            }
+
+            return new Response(res, 200, response);
+        } catch (error) {
+            next(error);
+        }
+    };
+
     async deleteItem(req, res, next){
         try {
             const result = await Product.destroy({ where: { id: req.body.id } });
